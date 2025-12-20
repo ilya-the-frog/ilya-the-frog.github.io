@@ -2,14 +2,26 @@ body {
   font-family: "Helvetica";
   background-color: #f5f5f5;
   color: #000000;
+
+  /* оставляем центрирование, но делаем страницу “контейнерной” */
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+}
+
+/* =========================
+   Layout (adult version)
+   ========================= */
+:root {
+  /* ширина контента (примерно +20% от твоих 360–400px) */
+  --content: 480px;
+  --inner: 432px;          /* внутренняя ширина карточек/заголовков */
+  --gap: 40px;             /* внешний отступ страницы */
 }
 
 .header {
   margin: 40px 0;
+  width: min(var(--content), calc(100vw - var(--gap)));
 }
 
 .header__avatar {
@@ -33,7 +45,9 @@ body {
   font-size: 32px;
   line-height: 1.2;
   font-family: "Helvetica Neue";
-  width: 360px;            /* выравниваем по контейнеру */
+
+  /* было фикс 360px — теперь резиново */
+  width: min(var(--inner), calc(100vw - var(--gap)));
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -45,19 +59,23 @@ body {
   line-height: 1.4;
   margin: 0;
   font-weight: normal;
-  width: 360px;            /* та же ширина */
+
+  /* было фикс 360px — теперь резиново */
+  width: min(var(--inner), calc(100vw - var(--gap)));
   margin-left: auto;
   margin-right: auto;
   text-align: left;
 }
 
 .links {
-  width: 400px;
+  /* было фикс 400px — теперь резиново */
+  width: min(var(--content), calc(100vw - var(--gap)));
   margin: 0 auto 40px;
 }
 
 .links__header {
-  width: 360px;
+  /* было фикс 360px — теперь резиново */
+  width: min(var(--inner), calc(100vw - var(--gap)));
   margin: 0 auto 15px;
   font-family: "Helvetica Neue";
   font-size: 24px;
@@ -73,18 +91,17 @@ body {
   align-items: flex-start;
   padding: 20px 20px 10px;
   gap: 10px;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
   box-sizing: border-box;
   margin: 0 auto;
-  width: 360px; /* например, фиксированная ширина */
+
+  /* было фикс 360px — теперь резиново */
+  width: min(var(--inner), calc(100vw - var(--gap)));
 }
 
 .links__link,
 .links__title {
   font-size: 14px;
-  font-size: 1.4;
+  font-size: 1.4; /* оставил как в исходнике, но имей в виду: это невалидно (без unit) */
 }
 
 .links__link {
@@ -94,7 +111,9 @@ body {
   padding: 0px 0px 10px;
   gap: 30px;
   border-bottom: 1px solid #dadada;
-  width: 320px;
+
+  /* было фикс 320px — теперь резиново + учитываем padding контейнера */
+  width: 100%;
 }
 
 .links__link:last-child {
@@ -119,7 +138,9 @@ body {
 
 footer {
   margin: 0 0 40px 0;
+  width: min(var(--content), calc(100vw - var(--gap)));
 }
+
 .button-link {
   box-sizing: border-box;
   display: flex;
@@ -127,7 +148,10 @@ footer {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  width: 350px;
+
+  /* было фикс 350px — теперь резиново */
+  width: min(var(--inner), calc(100vw - var(--gap)));
+
   background: #a370f0;
   border-radius: 20px;
 
