@@ -1,156 +1,178 @@
+/* =========================
+   Base
+   ========================= */
+:root {
+  /* Максимальная ширина контента на больших экранах */
+  --page-max: 980px;
+
+  /* Базовые боковые отступы (растут на больших экранах) */
+  --page-pad: clamp(16px, 3vw, 32px);
+
+  /* Внутренние отступы карточек */
+  --card-pad: 20px;
+
+  /* Вертикальные отступы между секциями */
+  --section-gap: 40px;
+
+  /* Ширина левой колонки (заголовки в строках) */
+  --label-min: 140px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  font-family: "Helvetica";
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Helvetica", "Helvetica Neue", Arial, sans-serif;
   background-color: #f5f5f5;
   color: #000000;
 
-  /* оставляем центрирование, но делаем страницу “контейнерной” */
+  /* Центрируем “колонку” сайта */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* =========================
-   Layout (adult version)
-   ========================= */
-:root {
-  /* ширина контента (примерно +20% от твоих 360–400px) */
-  --content: 480px;
-  --inner: 432px;          /* внутренняя ширина карточек/заголовков */
-  --gap: 40px;             /* внешний отступ страницы */
+/* Общий контейнер для основных блоков (header/sections/footer) */
+.header,
+.links,
+footer {
+  width: min(100% - (2 * var(--page-pad)), var(--page-max));
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* =========================
+   Header
+   ========================= */
 .header {
-  margin: 40px 0;
-  width: min(var(--content), calc(100vw - var(--gap)));
+  margin: var(--section-gap) 0;
 }
 
 .header__avatar {
-  width: 300px;
-  height: 300px;
+  width: clamp(180px, 22vw, 300px);
+  height: clamp(180px, 22vw, 300px);
   object-fit: cover;
   border-radius: 50%;
   display: block;
   margin: 0 auto;
-  border: 4px solid transparent; /* по умолчанию без обводки */
+  border: 4px solid transparent;
   transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .header__avatar:hover {
-  border: 4px solid #a370f0; /* 💜 сиреневая обводка при наведении */
+  border: 4px solid #a370f0;
   box-shadow: 0 0 12px rgba(179, 107, 240, 0.4);
 }
 
 .header__title {
-  margin: 30px 0 10px 0;
-  font-size: 32px;
+  margin: 26px 0 10px 0;
+  font-size: clamp(24px, 3vw, 32px);
   line-height: 1.2;
-  font-family: "Helvetica Neue";
-
-  /* было фикс 360px — теперь резиново */
-  width: min(var(--inner), calc(100vw - var(--gap)));
-  margin-left: auto;
-  margin-right: auto;
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   text-align: left;
 }
 
 .header__subtitle {
+  margin: 0;
   color: #8f8f8f;
   font-size: 16px;
   line-height: 1.4;
-  margin: 0;
   font-weight: normal;
-
-  /* было фикс 360px — теперь резиново */
-  width: min(var(--inner), calc(100vw - var(--gap)));
-  margin-left: auto;
-  margin-right: auto;
   text-align: left;
 }
 
+/* =========================
+   Sections
+   ========================= */
 .links {
-  /* было фикс 400px — теперь резиново */
-  width: min(var(--content), calc(100vw - var(--gap)));
-  margin: 0 auto 40px;
+  margin: 0 auto var(--section-gap);
 }
 
 .links__header {
-  /* было фикс 360px — теперь резиново */
-  width: min(var(--inner), calc(100vw - var(--gap)));
-  margin: 0 auto 15px;
-  font-family: "Helvetica Neue";
+  margin: 0 0 15px 0;
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   font-size: 24px;
   line-height: 1.4;
 }
 
+/* “Карточка” со списком */
 .links__container {
   list-style-type: none;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 20px 20px 10px;
+  align-items: stretch;
+  padding: var(--card-pad);
+  padding-bottom: calc(var(--card-pad) - 10px);
   gap: 10px;
-  box-sizing: border-box;
-  margin: 0 auto;
-
-  /* было фикс 360px — теперь резиново */
-  width: min(var(--inner), calc(100vw - var(--gap)));
+  margin: 0;
 }
 
-.links__link,
-.links__title {
-  font-size: 14px;
-  font-size: 1.4; /* оставил как в исходнике, но имей в виду: это невалидно (без unit) */
-}
-
+/* Строка в карточке */
 .links__link {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 0px 0px 10px;
-  gap: 30px;
+  gap: 20px;
+  padding: 0 0 10px 0;
   border-bottom: 1px solid #dadada;
-
-  /* было фикс 320px — теперь резиново + учитываем padding контейнера */
   width: 100%;
 }
 
+/* Последнюю строку без разделителя */
 .links__link:last-child {
   border-bottom: none;
+  padding-bottom: 0;
 }
 
+/* Текст в строках */
+.links__title {
+  margin: 0;
+  min-width: var(--label-min);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+/* Ссылки */
 .linsk__link {
-  color: #a370f0; /* базовый сиреневый */
+  color: #a370f0;
   text-decoration: none;
   transition: color 0.3s ease;
+  font-size: 14px;
+  line-height: 1.35;
+
+  /* чтобы длинные ссылки/почта не ломали верстку */
+  word-break: break-word;
 }
 
 .linsk__link:hover {
-  color: #7a4ccc; /* темнее при наведении */
+  color: #7a4ccc;
   text-decoration: underline;
 }
 
-.links__title {
-  margin: 0;
-  min-width: 100px;
-}
-
+/* =========================
+   Footer
+   ========================= */
 footer {
-  margin: 0 0 40px 0;
-  width: min(var(--content), calc(100vw - var(--gap)));
+  margin: 0 0 var(--section-gap) 0;
 }
 
 .button-link {
-  box-sizing: border-box;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-
-  /* было фикс 350px — теперь резиново */
-  width: min(var(--inner), calc(100vw - var(--gap)));
+  padding: 12px 14px;
+  width: 100%;
 
   background: #a370f0;
   border-radius: 20px;
@@ -160,4 +182,19 @@ footer {
 
   color: #ffffff;
   text-decoration: none;
+}
+
+/* =========================
+   Mobile tweaks
+   ========================= */
+@media (max-width: 520px) {
+  .links__link {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .links__title {
+    min-width: 0;
+    font-weight: 600;
+  }
 }
