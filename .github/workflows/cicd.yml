@@ -30,7 +30,7 @@ jobs:
           remote_path: ${{ secrets.BEGET_PATH }}
 
           # обычно на шаред-хостинге порт принимает SFTP
-          sftp_only: true
+          sftp_only: false
 
           # чтобы не заливать лишнее
           rsyncArgs: >
