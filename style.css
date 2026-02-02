@@ -153,11 +153,51 @@ footer {
 
   /* чтобы длинные ссылки/почта не ломали верстку */
   word-break: break-word;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .linsk__link:hover {
   color: #7a4ccc;
   text-decoration: underline;
+}
+
+.link-logo {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-logo svg {
+  width: 24px;
+  height: 24px;
+}
+
+.link-logo--telegram svg {
+  fill: #06c5f4;
+}
+
+.link-logo--email svg {
+  fill: #f37c05;
+}
+
+.link-logo--github svg {
+  fill: #0a0a0a;
+}
+
+.link-logo--linkedin svg {
+  fill: #265cff;
+}
+
+.link-logo--instagram svg {
+  fill: #c13584;
+}
+
+.link-logo--twitter svg {
+  fill: #2e77ff;
 }
 
 /* =========================
